@@ -66,7 +66,11 @@ public class JoinServlet2 extends HttpServlet {
 		out.println("		<tr>");
 		out.println("			<td>아이디</td>");
 		out.println("			<td>"+id+"</td>");
-		out.println("			<td rowspan='"+(hobbies.length+8)+"'></td>");
+		if(hobbies == null) {
+			out.println("			<td rowspan='7'></td>");
+		}else {
+			out.println("			<td rowspan='"+(hobbies.length+7)+"'></td>");
+		}
 		out.println("		</tr>");
 		out.println("		<tr>");
 		out.println("			<td>패쓰워드</td>");
@@ -89,20 +93,24 @@ public class JoinServlet2 extends HttpServlet {
 		out.println("			<td>"+job+"</td>");
 		out.println("		</tr>");
 		out.println("		<tr>");
-		if(hobbies.length==0) {
+		if(hobbies == null) {
 			out.println("			<td rowspan='1'>취미</td>");
-			out.println("		</tr>");
-			out.println("		<tr>");
-			out.println("<td>취미없음</td>");
+			out.println("			<td>취미없음</td>");
 			out.println("		</tr>");
 		}else {
-			out.println("			<td rowspan='"+(hobbies.length+1)+"'>취미</td>");
-			out.println("		</tr>");
+			out.println("			<td rowspan='"+hobbies.length+"'>취미</td>");
 			for(String hobby : hobbies) {
-
-				out.println("		<tr>");
-				out.println("<td>"+hobby+"</td>");
-				out.println("		</tr>");
+				int tr=0;
+				if(tr==0) {
+					out.println("<td>"+hobby+"</td>");
+					out.println("		</tr>");
+					tr++;
+				}else {
+					out.println("		<tr>");
+					out.println("<td>"+hobby+"</td>");
+					out.println("		</tr>");
+				}
+				
 			}
 		}
 		out.println("	</table></center>");

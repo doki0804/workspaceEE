@@ -40,7 +40,6 @@ public class LifeCycleCounterServlet extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 
-		
 	}
 	
 	@Override
