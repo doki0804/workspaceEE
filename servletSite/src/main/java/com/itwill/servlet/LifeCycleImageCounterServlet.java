@@ -2,6 +2,8 @@ package com.itwill.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/lifecycle_image_counter.do")
-public class LifeImageCounterServlet extends HttpServlet {
+public class LifeCycleImageCounterServlet extends HttpServlet {
 	private int count;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,15 +28,34 @@ public class LifeImageCounterServlet extends HttpServlet {
 		out.println("	<center>");
 		out.println("		현재까지의 페이지뷰수 <font color=#0000FF>" + ++count +"</font> 번입니다");
 		out.println("	</center>");
+		out.println("	<center>");
+		out.println("현재까지의 페이지뷰수 ");
+		out.println(imageCount(count));
+		out.println(" 번입니다");
+		out.println("	</center>");
+		out.println("	<center>");
+		out.println("현재까지의 페이지뷰수 ");
+		out.println(imageCounts(count));
+		out.println(" 번입니다");
+		out.println("	</center>");
 		out.println("</body>");
 		out.println("</html>");
-
 		
 	}
+	public String imageCount(int count) {
+		String imageStr = "";
+		for(int i=0; i<String.valueOf(count).length();i++) {
+			imageStr += "<img src='images/"+String.valueOf(count).charAt(i)+".png'>";
+		}
+		return imageStr;
+	}
 	
-	@Override
-	public void destroy() {
-		System.out.println("3.destroy()메쏘드 --> 서블릿객체가 메모리에서 해제되기 직전에 호출[리소스 반납]");
+	public String imageCounts(int count) {
+		String imageStr = "";
+		for(int i=0; i<String.valueOf(count).length();i++) {
+			imageStr=imageStr.concat("<img src='images/"+String.valueOf(count).charAt(i)+".png'>");
+		}
+		return imageStr;
 	}
 	
 }
