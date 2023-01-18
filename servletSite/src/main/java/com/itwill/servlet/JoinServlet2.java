@@ -3,6 +3,7 @@ package com.itwill.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,7 @@ public class JoinServlet2 extends HttpServlet {
 		/*
 		 * 1.파라메타받기
 		 */
+	
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		String repass = request.getParameter("repass");
@@ -39,7 +41,6 @@ public class JoinServlet2 extends HttpServlet {
 		/*
 		 * 2.Service객체 가입메쏘드호출
 		 */
-		
 		/*
 		 * 3.클라이언트로 응답 출력
 		 */
@@ -100,21 +101,13 @@ public class JoinServlet2 extends HttpServlet {
 		}else {
 			out.println("			<td rowspan='"+hobbies.length+"'>취미</td>");
 			for(String hobby : hobbies) {
-				int tr=0;
-				if(tr==0) {
 					out.println("<td>"+hobby+"</td>");
 					out.println("		</tr>");
-					tr++;
-				}else {
-					out.println("		<tr>");
-					out.println("<td>"+hobby+"</td>");
-					out.println("		</tr>");
-				}
-				
 			}
 		}
 		out.println("	</table></center>");
 		out.println("</body>");
 		out.println("</html>");
 	}
+	    
 }
