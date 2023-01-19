@@ -38,6 +38,7 @@ public class JoinServlet2 extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String job = request.getParameter("job");
 		String[] hobbies  = request.getParameterValues("hobby");
+		
 		/*
 		 * 2.Service객체 가입메쏘드호출
 		 */
