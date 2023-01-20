@@ -6,12 +6,12 @@
 		response.sendRedirect("4.form2.jsp");
 		return;
 	}
-	String id = request.getParameter("");
-	String password = request.getParameter("");
-	String name = request.getParameter("");
-	String address = request.getParameter("");
-	String gender = request.getParameter("");
-	String job = request.getParameter("");
+	String id = request.getParameter("id");
+	String password = request.getParameter("password");
+	String name = request.getParameter("name");
+	String address = request.getParameter("addr");
+	String gender = request.getParameter("gender");
+	String job = request.getParameter("job");
 	String[] hobbies = request.getParameterValues("hobby");
 
 %>
@@ -41,38 +41,45 @@ td, tr, th {
 		</tr>
 		<tr>
 			<td>아이디</td>
-			<td>guard884</td>
-			<td rowspan="10"></td>
+			<td><%=id %></td>
+		<%if(hobbies == null) {%>
+			<td rowspan=7></td>
+		<%}else {%>
+			<td rowspan=<%=hobbies.length+7 %>></td>
+		<%} %>
 		</tr>
 		<tr>
 			<td>패쓰워드</td>
-			<td>1234</td>
+			<td><%=password %></td>
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td>김경호</td>
+			<td><%=name %></td>
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td>역삼동</td>
+			<td><%=address %></td>
 		</tr>
 		<tr>
 			<td>성별</td>
-			<td>남</td>
+			<td><%=gender %></td>
 		</tr>
 		<tr>
 			<td>직업</td>
-			<td>회사원</td>
+			<td><%=job %></td>
 		</tr>
 		<tr>
-			<td rowspan='3'>취미</td>
-			<td>낮잠</td>
-		</tr>
-		<tr>
-			<td>운동</td>
-		</tr>
-		<tr>
-			<td>기타</td>
+		<%if(hobbies == null){ %>
+			<td rowspan=1>취미</td>
+			<td>취미없음</td>
+			</tr>
+		<%}else {%>
+			<td rowspan=<%=hobbies.length %>>취미</td>
+			<%for(String hobby : hobbies){ %>
+				<td><%=hobby %></td>
+			</tr>
+			<%} %>
+		<%} %>
 		</tr>
 	</table>
 

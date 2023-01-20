@@ -28,6 +28,9 @@
 <ul>
 	<li><%= list %></li>
 	<li><%= map %></li>
+	<li><%= student %></li>
+	<li><%= studentDao %></li>
+	<li><%= studentService %></li>
 </ul>
 </body>
 </html>
