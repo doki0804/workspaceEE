@@ -12,7 +12,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello JSP</h1>
-	<hr/>
+	<%for(int i=0; i<10; i++){%>
+	<h1>Hello JSP(change) <% out.print(i); %></h1>
+	<%}%>
 </body>
 </html>
