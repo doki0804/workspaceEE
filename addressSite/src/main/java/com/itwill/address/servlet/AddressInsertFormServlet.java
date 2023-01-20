@@ -35,7 +35,6 @@ public class AddressInsertFormServlet extends HttpServlet {
 		out.println("		<a href='address_list.do'>[주소록리스트]</a>");
 		out.println("	</div>");
 		out.println("	<form method='post' action='address_insert_action.do'>");
-		
 		out.println("		이름----<input type='text' name='name'><br> ");
 		out.println("		전화번호<input type='text' name='phone'><br> ");
 		out.println("		주소----<input type='text' name='address'><br><br>");
