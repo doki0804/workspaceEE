@@ -4,10 +4,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	
+	function body_load_function(){
+		/*
+		DOM Tree생성후 렌더링 직전 onload이벤트발생
+		*/
+		console.log("body_load_function()실행!!");
+		window.document.joinForm.id.focus();
+		
+	}
 </script>
 </head>
-<body>
+<body onload="body_load_function();">
 	<h1>
 	자바스크립트이벤트</h1>
 	<hr>
@@ -31,6 +38,7 @@
 		<input type="submit" value="submit버튼" >
 		<input type="image"  value="image(submit)버튼" src="bbs_write.gif"> 
 	</form>
+	
 	<br/>
 	<br/>
 	<input type="button" value="일반버튼" ><br>
