@@ -32,10 +32,32 @@
 	}
 	
 	function hello4(name,msg,count){
+		console.log(name);
+		console.log(msg);
+		console.log(count);
+		if(count === undefined){
+			count = 1;
+		}
 		for(let i=0; i < count; i++){
 			document.write(name+ " 님 "+ msg + "[ hello4(name,msgm,count)]<br>");
-		}
+			}
 	}
+	/*************function return**************/
+	function add(a,b){
+		return a+b;
+	}
+	
+	function sub(a,b){
+		return a-b;
+	}
+	
+	function mul(a,b){
+		return a*b;
+	}
+	function alert(msg){
+		document.write("<i>내가만든경고함수(window.alert(msg)함수를 대체해버림):"+msg+"</i><br>");
+	}
+	
 </script>
 
 </head>
@@ -49,7 +71,14 @@
 	hello2('뭐하세요');
 	hello2('안녕하세요!');
 	hello3('제임스','뭐하십니까');
-	hello4('준','새해복많이받아요',5);
+	hello4('준','새해복많이 받으세요!!',2);
+	hello4("호","누구세요");
+	let result = add(1,2);
+	document.write('add result:'+result+'<br>');
+	result = sub(1,2);
+	document.write('add result:'+result+'<br>');
+	document.write('add result:'+mul(2,3)+'<br>');
+	window.alert('경고메세지');
 	// body_end_function(); 정의되기 전에 호출하면 안됨
 </script>
 
