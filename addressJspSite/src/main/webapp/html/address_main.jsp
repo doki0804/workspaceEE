@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>주소록관리메인</h1><hr/>
-<p>접속IP:192.168.15.31</p>
+<p>접속IP:<%=request.getRemoteAddr() %></p>
 <ul>
 	<li><a href='address_list.jsp'>주소록리스트</a></li>
 	<li><a href='address_insert_form.jsp'>주소록쓰기폼</a></li>
