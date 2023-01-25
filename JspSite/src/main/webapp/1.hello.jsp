@@ -15,5 +15,7 @@
 	<%for(int i=0; i<10; i++){%>
 	<h1>Hello JSP(change) <% out.print(i); %></h1>
 	<%}%>
+	<br>
+	<%@include file="5-6.directive_included_file.jspf" %>
 </body>
 </html>
