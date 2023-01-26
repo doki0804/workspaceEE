@@ -5,8 +5,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 		
-		function join_form_validation_submit_button(){
-			
+		function join_form_validation_submit_button(f){
 			/*
 			DOM Tree에있는 form엘레멘트객체에 접근하는방법
 				1. window.document.form태그의name속성값
@@ -28,9 +27,42 @@
 			       ex> window.document.joinForm.id
 				
 			*/
+			if(!f.id.value || f.id.value === ''){
+				alert('아이디를 입력하세요');
+				f.id.focus();
+				return false;
+			}
+			if(!f.password.value || f.password.value === ''){
+				alert('패스워드를 입력하세요');
+				f.password.focus();
+				return false;
+			}
+			if(!f.repassword.value || f.repassword.value === ''){
+				alert('패스워드를 입력하세요');
+				f.repassword.focus();
+				return false;
+			}
+			if(!f.name.value || f.name.value === ''){
+				alert('이름을 입력하세요');
+				f.name.focus();
+				return false;
+			}
+			if(!f.address.value || f.address.value === ''){
+				alert('주소를 입력하세요');
+				f.address.focus();
+				return false;
+			}
+			if(f.password.value!==f.repassword.value){
+				alert('패스워드와 패스워드확인이 일치하지 않습니다.');
+				f.repassword.select();
+				return false;
+			}
 			
+			
+			return true;
 			
 			/*
+			QUIZ
 			1.아이디는 5~10자여야한다
 			2.영문알파벳대문자,소문자,숫자만 가능
 			3.아이디의 첫글자는 영문알파벳대문자,소문자만 가능합니다(숫자로 시작할수없다)
@@ -39,13 +71,45 @@
 		}
 		function join_form_validation_button(){
 			// validation
-			
+			let f = document.joinForm;
+			if(!f.id.value || f.id.value === ''){
+				alert('아이디를 입력하세요');
+				f.id.focus();
+				return false;
+			}
+			if(!f.password.value || f.password.value === ''){
+				alert('패스워드를 입력하세요');
+				f.password.focus();
+				return false;
+			}
+			if(!f.repassword.value || f.repassword.value === ''){
+				alert('패스워드를 입력하세요');
+				f.repassword.focus();
+				return false;
+			}
+			if(!f.name.value || f.name.value === ''){
+				alert('이름을 입력하세요');
+				f.name.focus();
+				return false;
+			}
+			if(!f.address.value || f.address.value === ''){
+				alert('주소를 입력하세요');
+				f.address.focus();
+				return false;
+			}
+			if(f.password.value!==f.repassword.value){
+				alert('패스워드와 패스워드확인이 일치하지 않습니다.');
+				f.repassword.select();
+				return false;
+			}
 			/*
 			1.아이디는 5~10자여야한다
 			2.영문알파벳대문자,소문자,숫자만 가능
 			3.아이디의 첫글자는 영문알파벳대문자,소문자만 가능합니다(숫자로 시작할수없다)
 			*/
-			
+			f.method = 'POST';
+			f.action = 'login_action.jsp';
+			f.submit();
 		}	
 	
 		
@@ -66,6 +130,7 @@
 			action="join_action.jsp" 
 			method="post" 
 			style="border: 1px solid blue;width:400px;padding: 30px"
+			onsubmit="return join_form_validation_submit_button(document.joinForm);"
 			>
 			
 		아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -92,8 +157,8 @@
 	3. a 태그의  href 속성안에기술 javascript:라는접두어를 붙여준다.
 	</pre>
 	
-	<a href="">가입</a>
-	<a href=""><img src='bbs_write.gif'></a>
+	<a href="javascript:join_form_validation_button();">가입</a>
+	<a href="javascript:join_form_validation_button();"><img src='bbs_write.gif'></a>
 	</div>
 </body>
 </html>
