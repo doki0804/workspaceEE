@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +24,12 @@
 		div1E.innerHTML+="</ol>";
 		*/
 		let name='고소영';
+		/*
+		 template literal(``)을 사용하면 자바스트립트값을출력할수있어요
+		 ex>  
+				let name = '김경호';
+				let msg  = ` ${name}님안녕하세요!!`; %{}안에는 식만 올수있음
+		*/
 		div1E.innerHTML=`
 			<ol>
 				<li>김태희</li>
@@ -36,12 +42,20 @@
 		`;
 		
 	}
-	var count = 0;
+	let count = 0;
 	function access_img() {
-
+		count = count%3;
+		count++;
+		let imgE = document.getElementById('img1');
+		imgE.src='penguin'+count+'.gif';
 	}
 	function form_display() {
-
+		let f = document.getElementById('f');
+		if(f.style.visibility=='hidden'){
+			f.style.visibility='visible';
+		}else{
+			f.style.visibility='hidden';
+		}
 	}
 </script>
 

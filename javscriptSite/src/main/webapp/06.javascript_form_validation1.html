@@ -27,9 +27,16 @@
 			       ex> window.document.joinForm.id
 				
 			*/
+			let idCheck = /^[a-zA-Z][a-zA-Z0-9]{4,9}$/g;
+			let firstId = /^[a-zA-Z]+/g;
+			
 			if(!f.id.value || f.id.value === ''){
 				alert('아이디를 입력하세요');
 				f.id.focus();
+				return false;
+			}else if(!idCheck.test(f.id.value) || !firstId.test(f.id.value)){
+				alert('사용할 수 없는 아이디입니다.');
+				f.id.select();
 				return false;
 			}
 			if(!f.password.value || f.password.value === ''){
@@ -57,7 +64,9 @@
 				f.repassword.select();
 				return false;
 			}
-			
+			if(f.id.value.length>=5 && f.id.value.length<=10 && f.id.value.charAt(0)){
+				
+			}
 			
 			return true;
 			
@@ -72,35 +81,41 @@
 		function join_form_validation_button(){
 			// validation
 			let f = document.joinForm;
-			if(!f.id.value || f.id.value === ''){
+			let idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
+			
+			if(!f.id.value || f.id.value == ''){
 				alert('아이디를 입력하세요');
 				f.id.focus();
-				return false;
+				return;
+			}else if(!idCheck.test(f.id.value)){
+				alert('사용할 수 없는 아이디입니다.');
+				f.id.select();
+				return;
 			}
-			if(!f.password.value || f.password.value === ''){
+			if(!f.password.value || f.password.value == ''){
 				alert('패스워드를 입력하세요');
 				f.password.focus();
-				return false;
+				return;
 			}
-			if(!f.repassword.value || f.repassword.value === ''){
+			if(!f.repassword.value || f.repassword.value == ''){
 				alert('패스워드를 입력하세요');
 				f.repassword.focus();
-				return false;
+				return;
 			}
-			if(!f.name.value || f.name.value === ''){
+			if(!f.name.value || f.name.value == ''){
 				alert('이름을 입력하세요');
 				f.name.focus();
-				return false;
+				return;
 			}
-			if(!f.address.value || f.address.value === ''){
+			if(!f.address.value || f.address.value == ''){
 				alert('주소를 입력하세요');
 				f.address.focus();
-				return false;
+				return;
 			}
 			if(f.password.value!==f.repassword.value){
 				alert('패스워드와 패스워드확인이 일치하지 않습니다.');
 				f.repassword.select();
-				return false;
+				return;
 			}
 			/*
 			1.아이디는 5~10자여야한다
