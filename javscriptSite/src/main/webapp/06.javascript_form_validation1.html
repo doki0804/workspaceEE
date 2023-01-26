@@ -27,8 +27,7 @@
 			       ex> window.document.joinForm.id
 				
 			*/
-			let idCheck = /^[a-zA-Z][a-zA-Z0-9]{4,9}$/g;
-			let firstId = /^[a-zA-Z]+/g;
+			const idCheck = /^[a-zA-Z][a-zA-Z0-9]{4,9}$/g;
 			
 			if(!f.id.value || f.id.value === ''){
 				alert('아이디를 입력하세요');
@@ -80,8 +79,8 @@
 		}
 		function join_form_validation_button(){
 			// validation
-			let f = document.joinForm;
-			let idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
+			const f = document.joinForm;
+			const idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
 			
 			if(!f.id.value || f.id.value == ''){
 				alert('아이디를 입력하세요');

@@ -27,8 +27,8 @@
 			       ex> window.document.joinForm.id
 				
 			*/
-			let f = document.getElementById('joinForm');
-			let idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
+			const f = document.getElementById('joinForm');
+			const idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
 			
 			if(!f.id.value || f.id.value == ''){
 				alert('아이디를 입력하세요');
@@ -80,8 +80,8 @@
 			
 			
 			//2.form.submit();
-			let f = document.joinForm;
-			let idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
+			const f = document.joinForm;
+			const idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/g;
 
 			if(!f.id.value || f.id.value == ''){
 				alert('아이디를 입력하세요');
