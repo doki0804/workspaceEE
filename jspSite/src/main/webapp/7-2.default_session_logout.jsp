@@ -7,5 +7,8 @@
    세션객체무효화
    */
 	session.invalidate();
+
+	request.getSession(true);	
+
 	response.sendRedirect("7-2.default_session_login_form.jsp");	
 %>
