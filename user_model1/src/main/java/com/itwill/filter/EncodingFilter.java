@@ -46,7 +46,6 @@ public class EncodingFilter implements Filter {
 		//클라이언트요청리소스(*.jsp,servlet)로 요청
 		chain.doFilter(request, response);
 		
-		
 	}
 	public void destroy() {
 		//System.out.println("필터객체가 메모리에서 해지될때호출 destroy()");
