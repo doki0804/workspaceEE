@@ -13,7 +13,7 @@
 		5.성공:user_view.jsp redirection
 		  실패:user_error.jsp 
 	*/
-	request.setCharacterEncoding("UTF-8");
+	//request.setCharacterEncoding("UTF-8");
 	if(request.getMethod().equalsIgnoreCase("GET")){
 		response.sendRedirect("user_main.jsp");
 		return;

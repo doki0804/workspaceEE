@@ -41,22 +41,11 @@ public class EncodingFilter implements Filter {
 		
 		HttpServletRequest req=(HttpServletRequest)request;
 		System.out.println("요청시마다 호출 doFilter():"+req.getRequestURI());
-		
-		
-		
-		if (request.getCharacterEncoding() == null) {
-			if (encoding != null) {
-				request.setCharacterEncoding(this.encoding);
-			}
-		}
-		
-		//클라이언트 요청리소스로의요청
+		//요청객체인코딩설정
+		req.setCharacterEncoding(this.encoding);
+		//클라이언트요청리소스(*.jsp,servlet)로 요청
 		chain.doFilter(request, response);
-		/*
-		response.setContentType("text/plain;charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		out.print("난 필터!! 넌 누구!!!");
-		*/
+		
 		
 	}
 	public void destroy() {

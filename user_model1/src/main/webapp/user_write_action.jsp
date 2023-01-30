@@ -13,6 +13,7 @@
 	    5-1. 아이디중복이면 user_write_form.jsp  
 	    5-2. 가입성공이면   user_login_form.jsp 로 redierction
 	*/
+	request.setCharacterEncoding("UTF-8");
 	if(request.getMethod().equalsIgnoreCase("GET")){
 		response.sendRedirect("user_main.jsp");
 		return;
