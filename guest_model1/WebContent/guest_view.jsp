@@ -3,13 +3,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String guest_no = request.getParameter("guest_no");
-	if(guest_no==null || guest_no.equals("")) {
-		response.sendRedirect("guest_main.jsp");
-		return;
-	}
-	GuestService guestService = new GuestService();
-	Guest guest = guestService.guestDetail(Integer.parseInt(guest_no));
+/*
+ * 0.요청객체encoding설정
+ * 1.파라메타받기
+ * 2.GuestService객체생성
+ * 3.GuestService객체 selectByNo() 메쏘드호출
+ * 4.Guest  출력
+ */
+ String guest_noStr = request.getParameter("guest_no");
+ if(guest_noStr==null || guest_noStr.equals("")){
+	 response.sendRedirect(request.getContextPath());
+	 return;
+ }
+ Guest guest=null;
+ try{
+ 	GuestService guestService=new GuestService();
+ 	guest = guestService.guestDetail(Integer.parseInt(guest_noStr));
+ 	if(guest==null){
+ 		throw new NumberFormatException("guest가 null");
+ 	}
+ }catch(NumberFormatException e){
+	 e.printStackTrace();
+	 /**********case1(redirect)*************
+	 response.sendRedirect("guest_list.jsp");
+	 *****************************/
+	 /**********case2(scrip)*************/
+	 out.println("<script>");
+	 out.println("alert('존재하지않는 게시물입니다.');");
+	 out.println("location.href='guest_list.jsp';");
+	 out.println("</script>");
+	 return;
+ }catch(Exception e){
+	 e.printStackTrace();
+	 response.sendRedirect("guest_error.jsp");
+ }
+ 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,6 +52,7 @@
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
+								
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
@@ -59,27 +88,27 @@
 								</tr>
 							</table> <!-- view Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="guest_no" value="<%=guest.getGuest_no() %>" />
+								<input type="hidden" name="guest_no" value="<%=guest.getGuest_no()%>" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px"><%=guest.getGuest_no() %></td>
+											style="padding-left: 10px"><%=guest.getGuest_no()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px"><%=guest.getGuest_name() %></td>
+											style="padding-left: 10px"><%=guest.getGuest_name()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">날짜</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px"><%=guest.getGuest_date() %></td>
+											style="padding-left: 10px"><%=guest.getGuest_date()%></td>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px"><%=guest.getGuest_homepage() %></td>
+											style="padding-left: 10px"><%=guest.getGuest_homepage()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
@@ -89,15 +118,19 @@
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="110">내용</td>
 										<td width=490 bgcolor="ffffff" align="left"
-											style="padding-left: 10px"><%=guest.getGuest_content() %></td>
+											style="padding-left: 10px"><%=guest.getGuest_content()
+																			.replace("<","&lt;")
+																			.replace(">","&gt;")
+																			.replace("\n","<br>")%></td>
 									</tr>
 								</table>
 							</form> <br />
 							<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td align=center><input type="button" value="수정"onClick="guestModifyForm();"> &nbsp; 
-									<input type="button"value="삭제" onClick="guestRemove();"> &nbsp; 
-									<input type="button" value="목록" onClick="guestList()"></td>
+									<td align=center>
+										<input type="button" value="수정" onclick="guestModifyForm();"> &nbsp; 
+										<input type="button" value="삭제" onclick="guestRemove();"> &nbsp; 
+										<input type="button" value="목록" onclick="guestList()"></td>
 								</tr>
 							</table>
 						</td>
@@ -111,7 +144,7 @@
 		<!-- footer start-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_bottom.jsp"/>
+			<jsp:include page="include_common_bottom.jsp"/>	
 			<!-- include_common_bottom.jsp end-->
 		</div>
 		<!-- footer end -->
