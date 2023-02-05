@@ -29,8 +29,14 @@ insert into userinfo(user_id,user_password,user_name,user_phone,user_email,user_
             'test3@gmail.com','서울시 강남구');
 
 -- update 
-update userinfo set user_name = '테스트',user_phone=010-2222-2222;
+update userinfo set user_phone='010-2222-2222' where user_id='test3';
 
+-- delete
+delete from userinfo where user_id = 'test3';
+
+-- select
+
+select * from userinfo;
 
 
 
