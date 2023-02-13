@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script>
+</script>
 </head>
 <body>
 	<h1>회원페이지1</h1>
