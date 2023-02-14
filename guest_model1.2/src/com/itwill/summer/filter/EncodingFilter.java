@@ -1,4 +1,4 @@
-﻿package com.itwill.filter;
+﻿package com.itwill.summer.filter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,7 +16,7 @@ public class EncodingFilter implements Filter {
 	 * web.xml에서 전달된 인코딩 값을 초기화하는 메써드.
 	 * <filter>
 		<filter-name>Encoding Filter</filter-name>
-		<filter-class>com.itwill.filter.EncodingFilter</filter-class>
+		<filter-class>com.itwill.summer.filter.EncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>

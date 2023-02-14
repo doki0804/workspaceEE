@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class GuestMainServlet
  */
-@WebServlet("/guest_write_form.do")
+//@WebServlet("/guest_write_form.do")
 public class GuestWriteFormServlet extends HttpServlet {
 	
 	@Override
