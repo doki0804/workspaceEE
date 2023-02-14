@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestService;
+import com.itwill.guest.controller.GuestListController;
+import com.itwill.guest.controller.GuestMainController;
+import com.itwill.guest.controller.GuestModifyActionController;
+import com.itwill.guest.controller.GuestRemoveAction;
+import com.itwill.guest.controller.GuestViewController;
+import com.itwill.guest.controller.GuestWriteActionController;
+import com.itwill.guest.controller.GuestWriteFormController;
 
 /*
  * 1. 클라이언트(웹브라우져)의 모든요청을 받는 서블릿작성(front Controller)
@@ -62,111 +69,43 @@ public class DispatcherServlet extends HttpServlet {
 		 */
 
 		String forwardPath = "";
+		Controller controller = null;
 		if (command.equals("/guest_main.do")) {
-			/********************* main *********************/
-			forwardPath = "forward:/WEB-INF/views/guest_main.jsp";
+			/******* guest_main.do를 처리하는 Controller 객체생성 *******/
+			controller = new GuestMainController();
+			
 		} else if (command.equals("/guest_list.do")) {
-			/********************* list *********************/
-			try {
-				List<Guest> guestList = guestService.findAll();
-				request.setAttribute("userList", guestList);
-				forwardPath = "forward:/WEB-INF/views/guest_list.jsp";
-			} catch (Exception e) {
-				e.printStackTrace();
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			}
+			/****** guest_list.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestListController();
+					
 		} else if (command.equals("/guest_view.do")) {
-			/********************* view *********************/
-			try {
-				Guest guest = null;
-				String guest_noStr = request.getParameter("guest_no");
-				if (guest_noStr == null || guest_noStr.equals("")) {
-					forwardPath = "redirect:guest_main.do";
-				} else {
-					guest = guestService.findByNo(Integer.parseInt(guest_noStr));
-					request.setAttribute("guest", guest);
-					forwardPath = "forward:/WEB-INF/views/guest_view.jsp";
-					if (guest == null) {
-						throw new NumberFormatException("guest가 null");
-					}
-				}
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			} catch (Exception e) {
-				e.printStackTrace();
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			}
+			/****** guest_view.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestViewController();
 		} else if (command.equals("/guest_write_form.do")) {
-			forwardPath = "forward:/WEB-INF/views/guest_write_form.jsp";
+			/****** guest_write.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestWriteFormController();
+			
 		} else if (command.equals("/guest_write_action.do")) {
-			/********************* write_action *********************/
-			try {
-				if (request.getMethod().equalsIgnoreCase("GET")) {
-					forwardPath = "redirect:guest_main.do";
-				} else {
-					String guest_name = request.getParameter("guest_name");
-					String guest_email = request.getParameter("guest_email");
-					String guest_homepage = request.getParameter("guest_homepage");
-					String guest_title = request.getParameter("guest_title");
-					String guest_content = request.getParameter("guest_content");
-					guestService.insert(
-							new Guest(0, guest_name, null, guest_email, guest_homepage, guest_title, guest_content));
-					forwardPath = "redirect:guest_list.do";
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			}
+			/****** guest_write_action.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestWriteActionController();
+			
 		} else if (command.equals("/guest_modify_form.do")) {
-			try {
-				if (request.getMethod().equalsIgnoreCase("GET")) {
-					forwardPath = "redirect:guest_main.do";
-				} else {
-					String guest_noStr = request.getParameter("guest_no");
-					Guest guest = guestService.findByNo(Integer.parseInt(guest_noStr));
-					request.setAttribute("guest", guest);
-					forwardPath = "forward:/WEB-INF/views/guest_modify_form.jsp";
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			}
+			/****** guest_modify_form.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestModifyActionController();
+			
 		} else if (command.equals("/guest_modify_action.do")) {
-			try {
-				if (request.getMethod().equalsIgnoreCase("GET")) {
-					forwardPath = "redirect:guest_main.do";
-				} else {
-					String guest_noStr = request.getParameter("guest_no");
-					String guest_name = request.getParameter("guest_name");
-					String guest_email = request.getParameter("guest_email");
-					String guest_homepage = request.getParameter("guest_homepage");
-					String guest_title = request.getParameter("guest_title");
-					String guest_content = request.getParameter("guest_content");
-					guestService.update(new Guest(Integer.parseInt(guest_noStr), guest_name, null, guest_email,
-							guest_homepage, guest_title, guest_content));
-					forwardPath = "redirect:guest_view.do?guest_no=" + guest_noStr;
-				}
-			} catch (Exception e) {
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			}
+			/****** guest_view.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestModifyActionController();
+			
 		} else if (command.equals("/guest_remove_action.do")) {
-			try {
-				if (request.getMethod().equalsIgnoreCase("GET")) {
-					forwardPath = "redirect:guest_main.do";
-				} else {
-					String guest_noStr = request.getParameter("guest_no");
-					guestService.delete(Integer.parseInt(guest_noStr));
-					forwardPath = "redirect:guest_list.do";
-				}
-			} catch (Exception e) {
-				forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
-			}
+			/****** guest_list.do를 처리하는 Controller 객체생성 ******/
+			controller = new GuestRemoveAction();
+			
 		} else {
 			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
 		}
-
+		
+		forwardPath = controller.handleRequest(request, response);
 		/*
 		 * 3.DispatcherServlet이 forwardPath를 사용해서 forward 혹은 redirect를 한다.
 		 */

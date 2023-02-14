@@ -17,15 +17,20 @@ public class DataSource {
 	private String user;
 	private String password;
 	/***********************************************/
-	public DataSource() throws Exception{
+	public DataSource() {
 		/*****jdbc.properties 파일을 읽어서 데이타베이스접속정보를 필드에저장 *****/
-		Properties properties=new Properties();
-		InputStream propertiesInput = DataSource.class.getResourceAsStream("/jdbc.properties");
-		properties.load(propertiesInput);
-		this.driverClass=properties.getProperty("driverClass");
-		this.url=properties.getProperty("url");
-		this.user=properties.getProperty("user");
-		this.password=properties.getProperty("password");
+		try {
+			Properties properties=new Properties();
+			InputStream propertiesInput = DataSource.class.getResourceAsStream("/jdbc.properties");
+			properties.load(propertiesInput);
+			this.driverClass=properties.getProperty("driverClass");
+			this.url=properties.getProperty("url");
+			this.user=properties.getProperty("user");
+			this.password=properties.getProperty("password");
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 	
 	/*
