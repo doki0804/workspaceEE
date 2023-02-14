@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.itwill.guest.Guest;
+import com.itwill.guest.GuestErrorController;
 import com.itwill.guest.GuestService;
 import com.itwill.guest.controller.GuestListController;
 import com.itwill.guest.controller.GuestMainController;
 import com.itwill.guest.controller.GuestModifyActionController;
+import com.itwill.guest.controller.GuestModifyFormController;
 import com.itwill.guest.controller.GuestRemoveAction;
 import com.itwill.guest.controller.GuestViewController;
 import com.itwill.guest.controller.GuestWriteActionController;
@@ -61,13 +63,10 @@ public class DispatcherServlet extends HttpServlet {
 		/*
 		 * 1.DispatcherServlet이 클라이언트의 요청 URI를 사용해서 요청을 분석
 		 */
-		String requestURI = request.getRequestURI();
-		String contextPath = request.getContextPath();
-		String command = requestURI.substring(contextPath.length());
+		String command = request.getRequestURI().substring(request.getContextPath().length());
 		/*
-		 * 2.DispatcherServlet이 클라이언트 요청에 따른 비지니스실행[Service객체사용]
+		 * 2-1.DispatcherServlet이 클라이언트 요청에 따른 controller객체 생성
 		 */
-
 		String forwardPath = "";
 		Controller controller = null;
 		if (command.equals("/guest_main.do")) {
@@ -81,6 +80,7 @@ public class DispatcherServlet extends HttpServlet {
 		} else if (command.equals("/guest_view.do")) {
 			/****** guest_view.do를 처리하는 Controller 객체생성 ******/
 			controller = new GuestViewController();
+			
 		} else if (command.equals("/guest_write_form.do")) {
 			/****** guest_write.do를 처리하는 Controller 객체생성 ******/
 			controller = new GuestWriteFormController();
@@ -91,20 +91,24 @@ public class DispatcherServlet extends HttpServlet {
 			
 		} else if (command.equals("/guest_modify_form.do")) {
 			/****** guest_modify_form.do를 처리하는 Controller 객체생성 ******/
-			controller = new GuestModifyActionController();
+			controller = new GuestModifyFormController();
 			
 		} else if (command.equals("/guest_modify_action.do")) {
-			/****** guest_view.do를 처리하는 Controller 객체생성 ******/
+			/****** guest_modify_action.do를 처리하는 Controller 객체생성 ******/
 			controller = new GuestModifyActionController();
-			
+						
 		} else if (command.equals("/guest_remove_action.do")) {
-			/****** guest_list.do를 처리하는 Controller 객체생성 ******/
+			/****** guest_remove_action.do를 처리하는 Controller 객체생성 ******/
 			controller = new GuestRemoveAction();
 			
 		} else {
-			forwardPath = "forward:/WEB-INF/views/guest_error.jsp";
+			controller = new GuestErrorController();
+			
 		}
-		
+		/*
+		 * 2-2.DispatcherServlet이 Controller 객체의 handleRequest 메쏘드 실행
+		 * 2-3.DispatcherServlet이 Controller 객체의 handleRequest메쏘드 실행 반환값이 forwardPath를 받는다.
+		 */
 		forwardPath = controller.handleRequest(request, response);
 		/*
 		 * 3.DispatcherServlet이 forwardPath를 사용해서 forward 혹은 redirect를 한다.
