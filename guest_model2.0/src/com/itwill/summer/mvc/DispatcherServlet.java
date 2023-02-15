@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itwill.guest.Guest;
 import com.itwill.guest.GuestErrorController;
-import com.itwill.guest.GuestService;
 import com.itwill.guest.controller.GuestListController;
 import com.itwill.guest.controller.GuestMainController;
 import com.itwill.guest.controller.GuestModifyActionController;
@@ -37,11 +35,6 @@ import com.itwill.guest.controller.GuestWriteFormController;
  */
 
 public class DispatcherServlet extends HttpServlet {
-	private GuestService guestService;
-
-	public DispatcherServlet() throws Exception {
-		guestService = new GuestService();
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
