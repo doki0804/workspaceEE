@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.itwill.guest.GuestService;
 import com.itwill.summer.mvc.Controller;
 
-public class GuestRemoveAction implements Controller {
+public class GuestRemoveActionController implements Controller {
 	private GuestService guestService;
 	
-	public GuestRemoveAction() {
+	public GuestRemoveActionController() {
 		guestService = new GuestService();
 	}
 	
