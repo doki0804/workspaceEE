@@ -183,6 +183,7 @@ public class DispatcherServlet extends HttpServlet {
 			//forwarding
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
+			
 		}
 		/*****************************************/
 		
