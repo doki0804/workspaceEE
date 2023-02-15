@@ -50,7 +50,7 @@ public class UserLoginActionController implements Controller {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				forwardPath = "redirect:user_error.do";
+				forwardPath = "forward:/WEB-INF/views/user_error.jsp";
 			}
 		}
 		return forwardPath;

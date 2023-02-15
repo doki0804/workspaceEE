@@ -8,21 +8,26 @@ import com.itwill.user.User;
 import com.itwill.user.UserService;
 
 public class UserViewController implements Controller{
+	private UserService userService;
+	
+	public UserViewController() throws Exception {
+		userService = new UserService();
+	}
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		String forwardPath="";
-		/****************login_check*******************/
 		if(request.getSession().getAttribute("sUserId")==null) {
 			forwardPath = "redirect:user_main.do";
+		}else {
+			try {
+				User user = userService.findUser((String)request.getSession().getAttribute("sUserId"));
+				request.setAttribute("user", user);
+				forwardPath = "forword:/WEB-INF/views/user_view.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+				forwardPath = "forward:/WEB-INF/views/user_error.jsp";			}
 		}
-		/*********************************************/
-		/*
-		1. UserService객체생성
-		2. 세션의 sUserId를 사용해서 UserService.findUser()메쏘드호출
-		3. 반환된 User객체출력
-		*/
-		
 		return forwardPath;
 	}
 
