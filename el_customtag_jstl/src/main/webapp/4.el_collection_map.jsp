@@ -12,12 +12,13 @@ ArrayList<Guest> guestList=new ArrayList<Guest>();
 guestList.add(g1);
 guestList.add(g2);
 guestList.add(g3);
+request.setAttribute("guestList", guestList);
 
 HashMap<String,Guest> guestMap=new HashMap<String,Guest>();
 guestMap.put("g1", g1);
 guestMap.put("g2", g2);
 guestMap.put("g3", g3);
-
+request.setAttribute("guestMap", guestMap);
 
 %>    
 <!DOCTYPE html>
