@@ -4,7 +4,7 @@
 <%
 	session.setAttribute("sUserId","admin");
 	session.setAttribute("sUserId","guard");
-	session.setAttribute("level",3); //레벨은 1~5사이의 정수
+	session.setAttribute("level",3); //레벨은 1~5사이의 정수 
 	
 %>    
 <!DOCTYPE html>
