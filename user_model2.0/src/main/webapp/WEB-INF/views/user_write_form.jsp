@@ -1,12 +1,6 @@
-<%@page import="com.itwill.user.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String msg = (String)request.getAttribute("msg");
-if(msg==null)msg="";
-User dUser = (User)request.getAttribute("dUser");
-if(dUser==null)dUser=new User("","","","");
-%>    
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,14 +96,14 @@ if(dUser==null)dUser=new User("","","","");
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="userId"
-											value="<%=dUser.getUserId()%>">&nbsp;&nbsp;<font color="red"><%=msg %></font>
+											value="${dUser.userId}">&nbsp;&nbsp;<font color="red">${msg }</font>
 										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="password" style="width: 150px" name="password"
-											value="<%=dUser.getPassword()%>">
+											value="${dUser.password}">
 										</td>
 									</tr>
 									<tr>
@@ -117,14 +111,14 @@ if(dUser==null)dUser=new User("","","","");
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="password" style="width: 150px" name="password2"
-											value="<%=dUser.getPassword()%>">
+											value="${dUser.password}">
 										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="name"
-											value="<%=dUser.getName()%>">
+											value="${dUser.name}">
 										</td>
 									</tr>
 									<tr>
@@ -132,7 +126,7 @@ if(dUser==null)dUser=new User("","","","");
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<input type="text" style="width: 150px" name="email"
-											value="<%=dUser.getEmail()%>">
+											value="${dUser.email}">
 										</td>
 									</tr>
 								</table>

@@ -44,7 +44,9 @@ public class UserLoginActionController implements Controller {
 					forwardPath = "forward:/WEB-INF/views/user_login_form.jsp";
 				}else if(loginResult == 2) {
 					//로그인성공
+					User sUser = userService.findUser(userId);
 					request.getSession().setAttribute("sUserId", userId);
+					request.getSession().setAttribute("sUser", sUser);
 					forwardPath = "redirect:user_main.do";
 				}
 				
