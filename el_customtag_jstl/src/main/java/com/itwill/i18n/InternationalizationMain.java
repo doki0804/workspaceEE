@@ -17,7 +17,7 @@ public class InternationalizationMain {
 		Locale cnLocale = new Locale("zh", "CN");
 		Locale esLocale = new Locale("es", "ES");
 		
-		Locale locale = jpLocale;
+		Locale locale = esLocale;
 		
 		/*
 		  Locale정보를 이용해서 guest_xx_YY.properties 중하나를 읽어서 
